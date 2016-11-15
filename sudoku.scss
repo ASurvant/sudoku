@@ -1,0 +1,26 @@
+#main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.use-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+h2 {
+  margin: 0.5em;
+}
+
+#numbers-container {
+  display: flex;
+  flex-direction: row;
+}
+
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
