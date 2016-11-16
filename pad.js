@@ -76,11 +76,12 @@ function solve(initArr) {
     let col = colCheck(i, j);
     let grid = gridCheck(i, j);
     let pool = []
-    for (var i = 1; i < 10; i++) {
-      if (row.indexOf(i) > -1) {
-        if (col.indexOf(i) > -1) {
-          if (grid.indexOf(i) > -1) {
-            pool.push(i);
+    for (var k = 1; k < 10; k++) {
+      if (row.indexOf(k) > -1) {
+        if (col.indexOf(k) > -1) {
+          if (grid.indexOf(k) > -1) {
+            // console.log("hi thare " + k);
+            pool.push(k);
           }
         }
       }
@@ -88,6 +89,71 @@ function solve(initArr) {
 
     return pool;
   }
+  // For each number and tile given, return true if
+  // that is the only tile the number can go to in that grid
+  // calls allPotentials on every spot in the given grid
+  function onlyTile(i, j) {
+    let currentSpot = allPotentials(i, j);
+    // concats allPotentials from every spot in same grid
+    let otherSpots = [];
+    let y = 0;
+    let x = 0;
+    // find which grid we're in
+    switch (true) {
+      case (i <= 2):
+        y = 0;
+      break;
+      case (i > 2 && i <= 5):
+        y = 3;
+      break;
+      default:
+        y = 6;
+    }
+
+    switch (true) {
+      case (j <= 2):
+        x = 0;
+      break;
+      case (j > 2 && j <= 5):
+        x = 3;
+      break;
+      default:
+        x = 6;
+    }
+    // iterate through those allPotentials
+    for (var idx = y; idx < y + 3; idx++) {
+      for (var jdx = x; jdx < x + 3; jdx++) {
+        let ballbat = true;
+
+        if (idx === i) {
+          if (jdx === j) {
+            ballbat = false;
+          };
+        };
+
+        if ((initArr[idx][jdx] === 0) && (ballbat)) {
+          // console.log(allPotentials(idx, jdx) + " all Pots " + idx + " " +jdx);
+          otherSpots.push(allPotentials(idx, jdx));
+        }
+      }
+    }
+
+    otherSpots = [].concat.apply([], otherSpots);
+    // console.log(otherSpots);
+
+    for (var focus = 0; focus < currentSpot.length; focus++) {
+      if (otherSpots.indexOf(currentSpot[focus]) === -1) {
+        // console.log("ticke me timbers");
+        // console.log(currentSpot[focus]);
+        return [currentSpot[focus]];
+      } else if (currentSpot[focus] === 9 && currentSpot.length === 5) {
+        console.log("ohai");
+        console.log(otherSpots);
+      }
+    }
+    return currentSpot;
+  }
+
 
   for (var lp = 0; lp < 90; lp++) {
     for (var i = 0; i < initArr.length; i++) {
@@ -95,15 +161,34 @@ function solve(initArr) {
       for (var j = 0; j < initArr.length; j++) {
         // initArr[i][j] is looking at a tile
         if (initArr[i][j] === 0) {
-          if (allPotentials(i, j).length === 1) {
-            initArr[i][j] = allPotentials(i, j)[0];
-          } else if (j === 4) {
-            // console.log(allPotentials(i, j));
-            return allPotentials(i, j);
+          if (onlyTile(i, j).length === 1) {
+            console.log("My man!");
+            console.log(onlyTile(i, j));
+            initArr[i][j] = onlyTile(i, j)[0];
           }
+          // else if (j === 4) {
+          //   // console.log("mmm");
+          //   return onlyTile(i, j);
+          // }
         }
       }
     }
+
+  // for (var lp = 0; lp < 90; lp++) {
+  //   for (var i = 0; i < initArr.length; i++) {
+  //     // initArr[i] is looking at a row
+  //     for (var j = 0; j < initArr.length; j++) {
+  //       // initArr[i][j] is looking at a tile
+  //       if (initArr[i][j] === 0) {
+  //         if (allPotentials(i, j).length === 1) {
+  //           initArr[i][j] = allPotentials(i, j)[0];
+  //         } else if (j === 4) {
+  //           // console.log(allPotentials(i, j));
+  //           return allPotentials(i, j);
+  //         }
+  //       }
+  //     }
+  //   }
     // if ([].concat.apply([], initArr).indexOf(0) === -1) {
     //   console.log("triggered" + lp);
     //   return initArr;
@@ -138,5 +223,5 @@ let secTest = [
   [0,0,0,0,0,9,0,0,0]
 ];
 
-// console.log(solve(firstTest));
-console.log(solve(secTest));
+console.log(solve(firstTest));
+// console.log(solve(secTest));
