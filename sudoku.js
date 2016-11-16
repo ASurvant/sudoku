@@ -37,8 +37,12 @@ $(function() {
       $($currentSelection[i]).text($(this).html());
       $($currentSelection[i]).css("background-color", "white");
     };
-    for (var i = 0; i < $currentSelection.length; i++) {
+    for (var i = $currentSelection.length - 1; i > -1; i--) {
       unselect($currentSelection[i]);
     };
+  });
+
+  $('.reset').click(function() {
+    console.log("yes");
   });
 });

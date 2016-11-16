@@ -49,10 +49,11 @@ h2 {
   justify-content: center;
   width: 30%;
   height: 30%;
-  border: 0.1em solid black;
+  border: 0.025em solid black;
   border-radius: 10px;
   background-color: white;
   font-family: 'Shadows Into Light', cursive;
+  font-size: 3em;
 }
 
 .space.selected {
@@ -74,7 +75,6 @@ h2 {
   font-size: 2em;
   width: 100%;
 }
-
 
 footer {
   display: flex;
