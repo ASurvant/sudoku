@@ -32,10 +32,12 @@ $(function() {
     }
   });
 
+  // Fills in selected tiles with whatever the user says
+  // then removes them from the selection array
   $('.num-selector').click(function() {
     for (var i = 0; i < $currentSelection.length; i++) {
       $($currentSelection[i]).text($(this).html());
-      $($currentSelection[i]).css("background-color", "white");
+      $($currentSelection[i]).toggleClass("selected");
     };
     for (var i = $currentSelection.length - 1; i > -1; i--) {
       unselect($currentSelection[i]);
@@ -43,6 +45,8 @@ $(function() {
   });
 
   $('.reset').click(function() {
-    console.log("yes");
+    $('.space').text("");
+    $currentSelection = [];
+    $('.space.selected').toggleClass("selected");
   });
 });
