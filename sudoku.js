@@ -1,22 +1,44 @@
 $(function() {
-  $('div').mouseenter(function() {
-      $(this).css("background-color", "yellow");
+  $playerFilled = [
+    [],[],[]
+  ];
 
+  $currentSelection = [];
+
+  function unselect(tile) {
+    let idx = $currentSelection.indexOf(tile);
+    if (idx > -1) {
+      $currentSelection.splice(idx, 1);
+    };
+  }
+
+  $('.num-selector').mouseenter(function() {
+    $(this).css("background-color", "yellow");
   });
 
-  $('div').mouseleave(function() {
-        $(this).css("background-color", "white");
+  $('.num-selector').mouseleave(function() {
+    $(this).css("background-color", "white");
   });
 
   $('div').click(function() {
     $(this).toggleClass("selected");
-    // $('#numbers-container').toggleClass("selected");
-  })
+  });
 
-  // $('div').click(function() {
-  //   $('#numbers-container').css("background-color", "yellow");
-  //
-  //   $(this).click(function() {
-  //   });
-  // });
+  $('div').click(function() {
+    if ($(this).hasClass("selected")) {
+      $currentSelection.push("#" + this.id);
+    } else {
+      unselect("#" + this.id);
+    }
+  });
+
+  $('.num-selector').click(function() {
+    for (var i = 0; i < $currentSelection.length; i++) {
+      $($currentSelection[i]).text($(this).html());
+      $($currentSelection[i]).css("background-color", "white");
+    };
+    for (var i = 0; i < $currentSelection.length; i++) {
+      unselect($currentSelection[i]);
+    };
+  });
 });
