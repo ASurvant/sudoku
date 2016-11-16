@@ -1,16 +1,5 @@
-// given the input, generate a list of potential placements
-// put any "only-option" placements into grid
-// remove or regenerate list of potential placements
-// when list is empty, return grid
-
-// generate 3 types of pre-potentials:
-// row, col, and grid
-// if the number is listed in all 3, then it is a potential
-// if the tile only has one potential, then that's the answer
-
-
 // TODO: refactor colCheck to leverage rowCheck
-
+//       add cross-potential checking
 
 function solve(initArr) {
   function gridCheck(i, j) {
@@ -108,14 +97,17 @@ function solve(initArr) {
         if (initArr[i][j] === 0) {
           if (allPotentials(i, j).length === 1) {
             initArr[i][j] = allPotentials(i, j)[0];
+          } else if (j === 4) {
+            // console.log(allPotentials(i, j));
+            return allPotentials(i, j);
           }
         }
       }
     }
-    if ([].concat.apply([], initArr).indexOf(0) === -1) {
-      console.log("triggered" + lp);
-      return initArr;
-    }
+    // if ([].concat.apply([], initArr).indexOf(0) === -1) {
+    //   console.log("triggered" + lp);
+    //   return initArr;
+    // }
   }
 
   return initArr;
@@ -134,4 +126,17 @@ let firstTest = [
   [0,5,1,9,0,3,6,8,0]
 ];
 
-console.log(solve(firstTest));
+let secTest = [
+  [0,0,0,5,0,0,0,0,0],
+  [0,7,0,6,2,0,0,5,0],
+  [0,3,0,0,0,0,8,0,9],
+  [0,0,8,9,0,0,0,0,6],
+  [2,0,0,0,0,0,0,0,7],
+  [4,0,0,0,0,2,5,0,0],
+  [6,0,4,0,0,0,0,3,0],
+  [0,2,0,0,1,5,0,6,0],
+  [0,0,0,0,0,9,0,0,0]
+];
+
+// console.log(solve(firstTest));
+console.log(solve(secTest));
