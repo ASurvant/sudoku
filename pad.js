@@ -2,9 +2,8 @@
 //       add cross-potential checking
 
 function solve(initArr) {
-  function gridCheck(i, j) {
-    let gridSet = [];
-    // provide a range
+  // finds which 3x3 area to begin a search in
+  function gridFind(i, j) {
     switch (true) {
       case (i <= 2):
         i = 0;
@@ -26,9 +25,16 @@ function solve(initArr) {
       default:
         j = 6;
     }
+    return [i, j];
+  }
 
-    for (var idx = i; idx < i + 3; idx++) {
-      for (var jdx = j; jdx < j + 3; jdx++) {
+  function gridCheck(i, j) {
+    let gridSet = [];
+    let x = gridFind(i, j)[1];
+    let y = gridFind(i, j)[0];
+
+    for (var idx = y; idx < y + 3; idx++) {
+      for (var jdx = x; jdx < x + 3; jdx++) {
         gridSet.push(initArr[idx][jdx]);
       }
     }
@@ -46,8 +52,8 @@ function solve(initArr) {
 
   function colCheck(i, j) {
     let potentials = [];
-
     let column = [];
+
     for (var idx = 0; idx < initArr.length; idx++) {
       column.push(initArr[idx][j]);
     }
@@ -57,6 +63,7 @@ function solve(initArr) {
         potentials.push(k);
       }
     }
+
     return potentials;
   };
 
@@ -80,7 +87,6 @@ function solve(initArr) {
       if (row.indexOf(k) > -1) {
         if (col.indexOf(k) > -1) {
           if (grid.indexOf(k) > -1) {
-            // console.log("hi thare " + k);
             pool.push(k);
           }
         }
@@ -89,37 +95,13 @@ function solve(initArr) {
 
     return pool;
   }
-  // For each number and tile given, return true if
-  // that is the only tile the number can go to in that grid
-  // calls allPotentials on every spot in the given grid
+
   function onlyTile(i, j) {
     let currentSpot = allPotentials(i, j);
-    // concats allPotentials from every spot in same grid
     let otherSpots = [];
-    let y = 0;
-    let x = 0;
-    // find which grid we're in
-    switch (true) {
-      case (i <= 2):
-        y = 0;
-      break;
-      case (i > 2 && i <= 5):
-        y = 3;
-      break;
-      default:
-        y = 6;
-    }
+    let y = gridFind(i, j)[0];
+    let x = gridFind(i, j)[1];
 
-    switch (true) {
-      case (j <= 2):
-        x = 0;
-      break;
-      case (j > 2 && j <= 5):
-        x = 3;
-      break;
-      default:
-        x = 6;
-    }
     // iterate through those allPotentials
     for (var idx = y; idx < y + 3; idx++) {
       for (var jdx = x; jdx < x + 3; jdx++) {
@@ -132,23 +114,17 @@ function solve(initArr) {
         };
 
         if ((initArr[idx][jdx] === 0) && (ballbat)) {
-          // console.log(allPotentials(idx, jdx) + " all Pots " + idx + " " +jdx);
           otherSpots.push(allPotentials(idx, jdx));
         }
       }
     }
 
     otherSpots = [].concat.apply([], otherSpots);
-    // console.log(otherSpots);
 
     for (var focus = 0; focus < currentSpot.length; focus++) {
       if (otherSpots.indexOf(currentSpot[focus]) === -1) {
-        // console.log("ticke me timbers");
-        // console.log(currentSpot[focus]);
         return [currentSpot[focus]];
       } else if (currentSpot[focus] === 9 && currentSpot.length === 5) {
-        console.log("ohai");
-        console.log(otherSpots);
       }
     }
     return currentSpot;
@@ -157,71 +133,66 @@ function solve(initArr) {
 
   for (var lp = 0; lp < 90; lp++) {
     for (var i = 0; i < initArr.length; i++) {
-      // initArr[i] is looking at a row
       for (var j = 0; j < initArr.length; j++) {
-        // initArr[i][j] is looking at a tile
         if (initArr[i][j] === 0) {
           if (onlyTile(i, j).length === 1) {
-            console.log("My man!");
-            console.log(onlyTile(i, j));
             initArr[i][j] = onlyTile(i, j)[0];
           }
-          // else if (j === 4) {
-          //   // console.log("mmm");
-          //   return onlyTile(i, j);
-          // }
         }
       }
     }
-
-  // for (var lp = 0; lp < 90; lp++) {
-  //   for (var i = 0; i < initArr.length; i++) {
-  //     // initArr[i] is looking at a row
-  //     for (var j = 0; j < initArr.length; j++) {
-  //       // initArr[i][j] is looking at a tile
-  //       if (initArr[i][j] === 0) {
-  //         if (allPotentials(i, j).length === 1) {
-  //           initArr[i][j] = allPotentials(i, j)[0];
-  //         } else if (j === 4) {
-  //           // console.log(allPotentials(i, j));
-  //           return allPotentials(i, j);
-  //         }
-  //       }
-  //     }
-  //   }
-    // if ([].concat.apply([], initArr).indexOf(0) === -1) {
-    //   console.log("triggered" + lp);
-    //   return initArr;
-    // }
   }
 
   return initArr;
 };
 
 
-let firstTest = [
-  [0,3,7,5,0,9,2,1,0],
-  [4,0,0,6,0,8,0,7,5],
-  [6,0,5,0,3,0,0,0,0],
-  [0,0,0,0,0,1,0,0,2],
-  [0,7,6,0,0,0,4,9,0],
-  [9,0,0,4,0,0,0,0,0],
-  [0,0,0,0,6,0,5,0,7],
-  [2,6,0,8,0,7,0,0,9],
-  [0,5,1,9,0,3,6,8,0]
-];
+// let firstTest = [
+//   [0,3,7,5,0,9,2,1,0],
+//   [4,0,0,6,0,8,0,7,5],
+//   [6,0,5,0,3,0,0,0,0],
+//   [0,0,0,0,0,1,0,0,2],
+//   [0,7,6,0,0,0,4,9,0],
+//   [9,0,0,4,0,0,0,0,0],
+//   [0,0,0,0,6,0,5,0,7],
+//   [2,6,0,8,0,7,0,0,9],
+//   [0,5,1,9,0,3,6,8,0]
+// ];
+//
+// let secTest = [
+//   [0,0,0,5,0,0,0,0,0],
+//   [0,7,0,6,2,0,0,5,0],
+//   [0,3,0,0,0,0,8,0,9],
+//   [0,0,8,9,0,0,0,0,6],
+//   [2,0,0,0,0,0,0,0,7],
+//   [4,0,0,0,0,2,5,0,0],
+//   [6,0,4,0,0,0,0,3,0],
+//   [0,2,0,0,1,5,0,6,0],
+//   [0,0,0,0,0,9,0,0,0]
+// ];
 
-let secTest = [
-  [0,0,0,5,0,0,0,0,0],
-  [0,7,0,6,2,0,0,5,0],
-  [0,3,0,0,0,0,8,0,9],
-  [0,0,8,9,0,0,0,0,6],
-  [2,0,0,0,0,0,0,0,7],
-  [4,0,0,0,0,2,5,0,0],
-  [6,0,4,0,0,0,0,3,0],
-  [0,2,0,0,1,5,0,6,0],
-  [0,0,0,0,0,9,0,0,0]
-];
-
-console.log(solve(firstTest));
+// console.log(solve(firstTest));
 // console.log(solve(secTest));
+
+function generateGrid() {
+  let rowLabels = "abcdefghi";
+  let grid = [[],[],[],[],[],[],[],[],[]];
+
+  for (var i = 0; i < rowLabels.length; i++) {
+    for (var j = 0; j < 9; j++) {
+      grid[i][j] =  "#" + rowLabels[i] + (j + 1);
+    }
+  };
+
+  return grid;
+};
+
+function loopies() {
+  let g = generateGrid();
+
+  for (var i = 0; i < g.length; i++) {
+    console.log(g[i].indexOf('f5'));
+  }
+}
+// console.log(generateGrid().indexOf('f5'));
+loopies();
