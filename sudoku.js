@@ -3,18 +3,6 @@
 $(function() {
   $grid = generateGrid();
 
-  // console.log(solve([
-  //   [0,3,7,5,0,9,2,1,0],
-  //   [4,0,0,6,0,8,0,7,5],
-  //   [6,0,5,0,3,0,0,0,0],
-  //   [0,0,0,0,0,1,0,0,2],
-  //   [0,7,6,0,0,0,4,9,0],
-  //   [9,0,0,4,0,0,0,0,0],
-  //   [0,0,0,0,6,0,5,0,7],
-  //   [2,6,0,8,0,7,0,0,9],
-  //   [0,5,1,9,0,3,6,8,0]
-  // ]));
-
   $currentSelection = [];
 
   function unselect(tile) {
@@ -79,6 +67,20 @@ $(function() {
   });
 
   $('.solve').click(function() {
-    // console.log($currentSelection);
+    for (var i = 0; i < $grid.length; i++) {
+      for (var j = 0; j < $grid.length; j++) {
+        if (typeof($grid[i][j]) === "string") {
+          $grid[i][j] = 0;
+        }
+      }
+    }
+    let solution = solve($grid);
+    $guide = generateGrid();
+    console.log(solve($grid));
+    for (var i = 0; i < $guide.length; i++) {
+      for (var j = 0; j < $guide.length; j++) {
+        $($guide[i][j]).text(solution[i][j]);
+      }
+    }
   });
 });
