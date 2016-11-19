@@ -55,7 +55,7 @@ $(function() {
       }
 
       unselect($currentSelection[i]);
-      console.log($grid);
+      // console.log($grid);
     };
   });
 
@@ -74,9 +74,10 @@ $(function() {
         }
       }
     }
+
     let solution = solve($grid);
     $guide = generateGrid();
-    console.log(solve($grid));
+
     for (var i = 0; i < $guide.length; i++) {
       for (var j = 0; j < $guide.length; j++) {
         $($guide[i][j]).text(solution[i][j]);
