@@ -157,7 +157,7 @@ function isValidBoard(board) {
 //   [0,2,0,0,1,5,0,6,0],
 //   [0,0,0,0,0,9,0,0,0]
 // ];
-//
+
 // let fourthTest = [
 //   [0,0,0,5,0,0,0,0,0],
 //   [0,7,0,6,2,0,0,5,0],
@@ -173,7 +173,7 @@ function isValidBoard(board) {
 // console.log(isValidBoard(correctBreak));
 // console.log(isValidBoard(invalidBreadk));
 // console.log(gameBrain(secondTest));
-// console.log(gameBrain(preBreak));
+// console.log(derp(secondTest));
 // console.log(derp(thirdTest));
 // console.log(gameBrain(fourthTest));
 // console.log(isValidBoard(fourthTest) === false);
@@ -209,9 +209,7 @@ function derp(berd) {
 
             if (isValidBoard(boardClone)) {
               if(i === 8 && j === 8) {
-                if (isValidBoard(boardClone)) {
-                  result = deepClone(boardClone);
-                }
+                result = deepClone(boardClone);
               }
               var path = gameBrain(boardClone);
 
