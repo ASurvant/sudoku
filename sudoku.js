@@ -75,7 +75,7 @@ $(function() {
       }
     }
 
-    let solution = derp($grid);
+    let solution = solve($grid);
     $guide = generateGrid();
 
     for (var i = 0; i < $guide.length; i++) {
