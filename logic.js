@@ -6,10 +6,10 @@ function generateGrid() {
     for (var j = 0; j < 9; j++) {
       grid[i][j] =  "#" + rowLabels[i] + (j + 1);
     }
-  };
+  }
 
   return grid;
-};
+}
 
 
 function areRowsValid(board) {
@@ -18,6 +18,7 @@ function areRowsValid(board) {
 
     for (var j = 0; j < board.length; j++) {
       let currentVal = board[i][j];
+
       if (seen[currentVal] && currentVal !== 0){
         return false;
       } else {
@@ -25,6 +26,7 @@ function areRowsValid(board) {
       }
     }
   }
+
   return true;
 }
 
@@ -55,6 +57,7 @@ function unitCheck(board, startingRow, startingCol) {
       }
     }
   }
+
   return true;
 }
 
@@ -76,6 +79,7 @@ function areGridsValid(board) {
       return false;
     }
   }
+
   return true;
 }
 
@@ -87,7 +91,6 @@ function isValidBoard(board) {
 
     for (var i = 0; i < 3; i++) {
       if ([rows, cols, units][i] === false) {
-
         return false;
       }
     }
@@ -96,77 +99,9 @@ function isValidBoard(board) {
 
   } else {
     return false;
-  };
-};
+  }
+}
 
-
-// let firstTest = [
-//   [ 8, 3, 7, 5, 4, 9, 2, 1, 6 ],
-//   [ 4, 9, 2, 6, 1, 8, 3, 7, 5 ],
-//   [ 6, 1, 5, 7, 3, 2, 9, 4, 8 ],
-//   [ 5, 4, 8, 3, 9, 1, 7, 6, 2 ],
-//   [ 1, 7, 6, 2, 8, 5, 4, 9, 3 ],
-//   [ 9, 2, 3, 4, 7, 6, 8, 5, 1 ],
-//   [ 3, 8, 9, 1, 6, 4, 5, 2, 7 ],
-//   [ 2, 6, 4, 8, 5, 7, 1, 3, 9 ],
-//   [ 7, 5, 1, 9, 2, 3, 6, 8, 4 ]
-// ];
-//
-//
-// let correctBreak = [
-//   [ 8, 4, 2, 5, 9, 3, 6, 7, 1 ],
-//   [ 9, 7, 1, 6, 2, 8, 3, 5, 4 ],
-//   [ 5, 3, 6, 7, 4, 1, 8, 2, 9 ],
-//   [ 7, 5, 8, 9, 3, 4, 2, 1, 6 ],
-//   [ 2, 1, 3, 8, 5, 6, 4, 9, 7 ],
-//   [ 4, 6, 9, 1, 7, 2, 5, 8, 3 ],
-//   [ 6, 9, 4, 2, 8, 7, 1, 3, 5 ],
-//   [ 3, 2, 7, 4, 1, 5, 9, 6, 8 ],
-//   [ 1, 8, 5, 3, 6, 9, 7, 4, 2 ] ];
-//
-let thirdTest = [
-  [0,0,0,5,0,0,0,0,0],
-  [0,7,0,6,2,0,0,5,0],
-  [0,3,0,0,0,0,8,0,9],
-  [0,0,8,9,0,0,0,0,6],
-  [2,0,0,0,0,0,0,0,7],
-  [4,0,0,0,0,2,5,0,0],
-  [6,0,4,0,0,0,0,3,0],
-  [0,2,0,0,1,5,0,6,0],
-  [0,0,0,0,0,9,0,0,0]
-];
-// let secondTest = [
-//   [0,3,7,5,0,9,2,1,0],
-//   [4,0,0,6,0,8,0,7,5],
-//   [6,0,5,0,3,0,0,0,0],
-//   [0,0,0,0,0,1,0,0,2],
-//   [0,7,6,0,0,0,4,9,0],
-//   [9,0,0,4,0,0,0,0,0],
-//   [0,0,0,0,6,0,5,0,7],
-//   [2,6,0,8,0,7,0,0,9],
-//   [0,5,1,9,0,3,6,8,0]
-// ];
-//
-
-// let fourthTest = [
-//   [0,0,0,5,0,0,0,0,0],
-//   [0,7,0,6,2,0,0,5,0],
-//   [0,3,0,0,0,0,8,0,9],
-//   [0,0,8,9,0,0,0,0,6],
-//   [2,0,0,0,0,0,0,0,7],
-//   [4,0,0,0,0,2,5,0,0],
-//   [6,0,4,0,0,0,0,3,0],
-//   [0,2,0,0,1,5,0,6,0],
-//   [0,0,0,0,0,9,0,0,3]
-// ];
-
-// console.log(isValidBoard(correctBreak));
-// console.log(isValidBoard(invalidBreadk));
-// console.log(gameBrain(secondTest));
-// console.log(derp(secondTest));
-// console.log(solve(thirdTest));
-// console.log(gameBrain(fourthTest));
-// console.log(isValidBoard(fourthTest) === false);
 function noZeroes(board) {
   let ans = true;
   for (var i = 0; i < board.length; i++) {
@@ -178,22 +113,25 @@ function noZeroes(board) {
   }
   return ans;
 }
-function deepClone(arr) {
-  var len = arr.length;
-  var newArr = new Array(len);
-  for (var i=0; i<len; i++) {
+
+function cloneBoard(arr) {
+  let len = arr.length;
+  let newArr = new Array(len);
+
+  for (var i = 0; i < len; i++) {
     if (Array.isArray(arr[i])) {
-      newArr[i] = deepClone(arr[i]);
-    }
-    else {
+      newArr[i] = cloneBoard(arr[i]);
+    } else {
       newArr[i] = arr[i];
     }
   }
+
   return newArr;
 }
 
 function firstEmpty(board) {
   let ans = [];
+
   for (var i = 0; i < board.length; i++) {
     for (var j = 0; j < board.length; j++) {
       if (board[i][j] === 0) {
@@ -218,11 +156,11 @@ function solve(board) {
 
   // loop through 1-9 in the tile, calling solve with each one until a match is found
   let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  let berd = deepClone(board);
+  let clonedBoard = cloneBoard(board);
 
   while (nums.length > 0) {
-    berd[focus[0]][focus[1]] = nums.shift();
-    var ans = solve(berd);
+    clonedBoard[focus[0]][focus[1]] = nums.shift();
+    var ans = solve(clonedBoard);
 
     if (isValidBoard(ans) && noZeroes(ans)) {
       nums = [];
