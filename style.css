@@ -4,7 +4,6 @@ html, body {
   height: 100%;
   width: 100%;
   margin: 0;
-  // background-color: black;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -52,12 +51,11 @@ h2 {
   border: 0.025em solid black;
   border-radius: 10px;
   background-color: white;
-  // font-family: 'Shadows Into Light', cursive;
   font-size: 2em;
 }
 
 .space.selected {
-  background-color: yellow;
+  background-color: #f1c40f;
 }
 
 #numbers-container {
