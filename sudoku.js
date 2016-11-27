@@ -1,5 +1,3 @@
-// TODO: Once a tile has been given a value, it cannot be over-written with a new value
-
 $(function() {
   $grid = generateGrid();
 
@@ -13,7 +11,7 @@ $(function() {
   }
 
   $('.num-selector').mouseenter(function() {
-    $(this).css("background-color", "yellow");
+    $(this).css("background-color", "#f1c40f");
   });
 
   $('.num-selector').mouseleave(function() {
@@ -32,13 +30,6 @@ $(function() {
     }
   });
 
-  // $('div').click(function() {
-  //   $(this).text = $(this.id);
-  //   console.log(this.id);
-  // })
-
-  // Fills in selected tiles with whatever the user says
-  // then removes them from the selection array
   $('.num-selector').click(function() {
     for (var i = 0; i < $currentSelection.length; i++) {
       $($currentSelection[i]).text($(this).html());
@@ -55,15 +46,11 @@ $(function() {
       }
 
       unselect($currentSelection[i]);
-      // console.log($grid);
     };
   });
 
   $('.reset').click(function() {
-    $('.space').text("");
-    $currentSelection = [];
-    $('.space.selected').toggleClass("selected");
-    $grid = generateGrid();
+    location.reload();
   });
 
   $('.solve').click(function() {
@@ -78,10 +65,16 @@ $(function() {
     let solution = solve($grid);
     $guide = generateGrid();
 
-    for (var i = 0; i < $guide.length; i++) {
-      for (var j = 0; j < $guide.length; j++) {
-        $($guide[i][j]).text(solution[i][j]);
+    if (solution.length > 1) {
+      for (var i = 0; i < $guide.length; i++) {
+        for (var j = 0; j < $guide.length; j++) {
+          if ($($guide[i][j]).text().length === 12) {
+            $($guide[i][j]).text(solution[i][j]).css("font-family", 'Shadows Into Light').css("background-color", "#ecf0f1");
+          }
+        }
       }
+    } else {
+      $('h1').text("Invalid Input Or No Solution - Hit Reset");
     }
   });
 });
