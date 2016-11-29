@@ -49,11 +49,11 @@ $(function() {
     };
   });
 
-  $('.reset').click(function() {
+  $('#reset').click(function() {
     location.reload();
   });
 
-  $('.solve').click(function() {
+  $('#solve').click(function() {
     for (var i = 0; i < $grid.length; i++) {
       for (var j = 0; j < $grid.length; j++) {
         if (typeof($grid[i][j]) === "string") {
