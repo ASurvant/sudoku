@@ -5,4 +5,4 @@ This is my contribution to freeing up the mental energy of my friends and family
 
 The code uses a recursive loop to test all combinations for any given input. It can be improved upon by generating the HTML grid with a JavaScript loop and making some of the helper code more functional for readability. For now it's fast and it works and we can all go back to making cooler projects!
 
-Feel free to visit https://www.anthonysurvant.com/ for more!
+Feel free to visit http://www.anthonysurvant.com/ for more!
