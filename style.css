@@ -1,0 +1,104 @@
+html, body {
+  min-width: 750px;
+  min-height: 650px;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+#main-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.use-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.top-button {
+  background: white;
+  border: 0.025em solid black;
+  border-radius: 10px;
+  font-family: 'Titillium Web', sans-serif;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px 20px 10px 20px;
+  margin: 0px 20px 20px 20px;
+  cursor: pointer;
+}
+
+.top-button:hover {
+  background: grey;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.board-container {
+  display: flex;
+  width: 650px;
+  height: 650px;
+  flex-wrap: wrap;
+}
+
+.g-container {
+  display: flex;
+  background-color: white;
+  justify-content: space-around;
+  align-items: center;
+  width: 33%;
+  height: 33%;
+  flex-wrap: wrap;
+  margin: 1px;
+}
+
+.space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 30%;
+  border: 0.025em solid black;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 2em;
+}
+
+.space.selected {
+  background-color: #f1c40f;
+}
+
+#numbers-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 500px;
+}
+
+.num-selector {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  width: 100%;
+  font-family: 'Titillium Web', sans-serif;
+  text-align: center;
+  font-size: 15px;
+  padding: 9px 20px 11px 20px;
+  margin: 10px 5px 5px 5px;
+  background-color: white;
+  border: 0.025em solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0em 0em 1em 0em;
+}
