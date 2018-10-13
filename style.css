@@ -8,7 +8,10 @@ html, body {
 }
 
 #main-container {
+<<<<<<< HEAD
   height: 100%;
+=======
+>>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,6 +99,10 @@ html, body {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
 footer {
   display: flex;
   flex-direction: column;

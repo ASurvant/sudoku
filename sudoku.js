@@ -68,7 +68,11 @@ $(function() {
     if (solution.length > 1) {
       for (var i = 0; i < $guide.length; i++) {
         for (var j = 0; j < $guide.length; j++) {
+<<<<<<< HEAD
           if ($.trim($($guide[i][j]).text()).length === 0) {
+=======
+          if ($($guide[i][j]).text().length === 12) {
+>>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
             $($guide[i][j]).text(solution[i][j]).css("font-family", 'Shadows Into Light').css("background-color", "#ecf0f1");
           }
         }
