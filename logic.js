@@ -2,7 +2,6 @@ function generateGrid() {
   let rowLabels = "abcdefghi";
   let grid = [[],[],[],[],[],[],[],[],[]];
 
-<<<<<<< HEAD
   for (let i = 0; i < rowLabels.length; i++) {
     for (let j = 1; j < 10; j++) {
       grid[i][j] =  ("#" + rowLabels[i] + j);
@@ -18,10 +17,6 @@ function generateGrid() {
 
   for (let i = 0; i < rowLabels.length; i++) {
     for (let j = 0; j < 9; j++) {
-=======
-  for (var i = 0; i < rowLabels.length; i++) {
-    for (var j = 0; j < 9; j++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       grid[i][j] =  "#" + rowLabels[i] + (j + 1);
     }
   }
@@ -31,17 +26,10 @@ function generateGrid() {
 
 
 function areRowsValid(board) {
-<<<<<<< HEAD
   for (let i = 0; i < board.length; i++) {
     let seen = Array(10).fill(false);
 
     for (let j = 0; j < board.length; j++) {
-=======
-  for (var i = 0; i < board.length; i++) {
-    let seen = Array(10).fill(false);
-
-    for (var j = 0; j < board.length; j++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       let currentVal = board[i][j];
 
       if (seen[currentVal] && currentVal !== 0){
@@ -56,17 +44,10 @@ function areRowsValid(board) {
 }
 
 function areColsValid(board) {
-<<<<<<< HEAD
   for (let i = 0; i < board.length; i++) {
     let seen = [];
 
     for (let j = 0; j < board.length; j++) {
-=======
-  for (var i = 0; i < board.length; i++) {
-    let seen = [];
-
-    for (var j = 0; j < board.length; j++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       if ((seen.indexOf(board[j][i]) > -1) && (board[j][i] > 0)) {
         return false;
       } else {
@@ -80,13 +61,8 @@ function areColsValid(board) {
 
 function unitCheck(board, startingRow, startingCol) {
   let seen = [];
-<<<<<<< HEAD
   for (let i = startingRow; i < startingRow + 3; i++) {
     for (let j = startingCol; j < startingCol + 3; j++) {
-=======
-  for (var i = startingRow; i < startingRow + 3; i++) {
-    for (var j = startingCol; j < startingCol + 3; j++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       if ((seen.indexOf(board[i][j]) > -1) && (board[i][j] > 0)) {
         return false;
       } else {
@@ -111,11 +87,7 @@ function areGridsValid(board) {
   let bmu = unitCheck(board, 6, 3);
   let bru = unitCheck(board, 6, 6);
 
-<<<<<<< HEAD
   for (let i = 0; i < 9; i++) {
-=======
-  for (var i = 0; i < 9; i++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
     if ([tlu, tmu, tru, mlu, mmu, mru, blu, bmu, bru][i] === false) {
       return false;
     }
@@ -130,11 +102,7 @@ function isValidBoard(board) {
     let cols = areColsValid(board);
     let units = areGridsValid(board);
 
-<<<<<<< HEAD
     for (let i = 0; i < 3; i++) {
-=======
-    for (var i = 0; i < 3; i++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       if ([rows, cols, units][i] === false) {
         return false;
       }
@@ -149,13 +117,8 @@ function isValidBoard(board) {
 
 function noZeroes(board) {
   let ans = true;
-<<<<<<< HEAD
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
-=======
-  for (var i = 0; i < board.length; i++) {
-    for (var j = 0; j < board.length; j++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       if (board[i][j] === 0) {
         ans = false;
       }
@@ -168,11 +131,7 @@ function cloneBoard(arr) {
   let len = arr.length;
   let newArr = new Array(len);
 
-<<<<<<< HEAD
   for (let i = 0; i < len; i++) {
-=======
-  for (var i = 0; i < len; i++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
     if (Array.isArray(arr[i])) {
       newArr[i] = cloneBoard(arr[i]);
     } else {
@@ -186,13 +145,8 @@ function cloneBoard(arr) {
 function firstEmpty(board) {
   let ans = [];
 
-<<<<<<< HEAD
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
-=======
-  for (var i = 0; i < board.length; i++) {
-    for (var j = 0; j < board.length; j++) {
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
       if (board[i][j] === 0) {
         ans.push(i);
         ans.push(j);
@@ -204,11 +158,8 @@ function firstEmpty(board) {
 }
 
 function solve(board) {
-<<<<<<< HEAD
   let ans;
 
-=======
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
   if (!isValidBoard(board)) {
     return [];
   } else if (isValidBoard(board) && noZeroes(board)) {
@@ -224,11 +175,7 @@ function solve(board) {
 
   while (nums.length > 0) {
     clonedBoard[focus[0]][focus[1]] = nums.shift();
-<<<<<<< HEAD
     ans = solve(clonedBoard);
-=======
-    var ans = solve(clonedBoard);
->>>>>>> 02a5d75a8b6821bf3970f14d6d0b42a4b5763d1f
 
     if (isValidBoard(ans) && noZeroes(ans)) {
       nums = [];
